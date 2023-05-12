@@ -54,6 +54,7 @@ public class IDA_STAR {
                             continue;
                         }
                         nodes_num++;  //add 1 to the total count of nodes that created
+//                        curr_neigh.g_plus_h = curr_neigh.cost_to_here + map.h(curr_neigh,Goal);
                         if (map.f(curr_neigh, Goal) > threshold) {   //If the f value of the current neighbor is greater than the threshold, then minF is updated to be the f value of the current neighbor, and we move to the next neighbor
                             minF = Math.min(minF, map.f(curr_neigh, Goal));
                             continue;

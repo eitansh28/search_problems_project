@@ -41,7 +41,7 @@ public class DFBnB {
         Stack<Node>stack = new Stack<>();
         Hashtable<Node, Character> open_list_hash = new Hashtable<>();
         String result = null;
-        int threshold = 10* (map.size);
+        int threshold = Integer.MAX_VALUE;
         first_new = new_first;
         Node curr, curr_neigh;
         List<Node> neighbors;

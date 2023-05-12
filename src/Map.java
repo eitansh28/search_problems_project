@@ -10,20 +10,28 @@ public class Map {
         this.size = data[0].length;
     }
 
+
+    public static int max_possible_neigh = 8;
+
     public Node neighbor(boolean clockwise, Node curr, Node father, int neig_num){
         /*
         function that return the neighbor (or null, if not valid) according to specific index
         */
+        int n = 0;
         if(!clockwise){    //change the order of the neigh if not clockwise
-            if(neig_num == 2) neig_num = 8;
-            if(neig_num == 3) neig_num = 7;
-            if(neig_num == 4) neig_num = 6;
-            if(neig_num == 8) neig_num = 2;
-            if(neig_num == 7) neig_num = 3;
-            if(neig_num == 6) neig_num = 4;
+            if(neig_num == 1) n = 1;  //no change
+            if(neig_num == 2) n = 8;
+            if(neig_num == 3) n = 7;
+            if(neig_num == 4) n = 6;
+            if(neig_num == 5) n = 5;  //no change
+            if(neig_num == 6) n = 4;
+            if(neig_num == 7) n = 3;
+            if(neig_num == 8) n = 2;
+        }else {
+            n = neig_num;
         }
         Node curr_neigh = null;
-        switch (neig_num) {    //Before creating each node I check that it is within the boundaries of the map, not marked with an X and not the father of the current node
+        switch (n) {    //Before creating each node I check that it is within the boundaries of the map, not marked with an X and not the father of the current node
             case 1:
                 if (curr.col + 1 <= size && this.Terrain[curr.row - 1][curr.col] != 'X') {  //right
                     if (father == null || curr.row != curr.father.row || curr.col + 1 != curr.father.col) {
@@ -98,7 +106,7 @@ public class Map {
         */
         ArrayList<Node> neigh = new ArrayList<>();
         Node curr_neigh;
-        for(int i=1;i<=8;i++){
+        for(int i=1;i<=max_possible_neigh;i++){
             curr_neigh = neighbor(clockwise,curr,curr.father,i);
             if (curr_neigh != null){
                 neigh.add(curr_neigh);
@@ -146,7 +154,7 @@ public class Map {
         }
         if(this.Terrain[son.row - 1][son.col - 1] == 'H'){
             cost = 5;
-            if(father.row != son.row && father.col != son.col){
+            if(father != null && father.row != son.row && father.col != son.col){
                 cost+= 5;
             }
         }
@@ -216,34 +224,21 @@ public class Map {
         /*
         A heuristic function that estimates the cost from curr to goal
         */
-        int count_steps = 0;
-//        if(goal.row == curr.row){
-//            count_steps = Math.abs(goal.col - curr.col);
-//        }
-//        else if(goal.col == curr.col){
-//            count_steps = Math.abs(goal.row - curr.row);
-//        }
-        // Calculate heuristic function
+        // Calculate heuristic function, A full explanation is given in the 'details.docx' file
+        int heuristic_eval = 0;
         if (Math.abs(goal.col - curr.col) < Math.abs(goal.row - curr.row)){
-            count_steps =  Math.abs(goal.row - curr.row) + (Math.abs(Math.abs(goal.col - curr.col) - Math.abs(goal.row - curr.row)));
+            heuristic_eval = Math.abs(goal.row - curr.row)  - cost(null,curr) + 5;
         }
-        else if(Math.abs(goal.col - curr.col) > Math.abs(goal.row - curr.row)){
-            count_steps = Math.abs(goal.col - curr.col) + (Math.abs(Math.abs(goal.col - curr.col) - Math.abs(goal.row - curr.row)));
-
+        else if(Math.abs(goal.col - curr.col) >= Math.abs(goal.row - curr.row)){
+            heuristic_eval = Math.abs(goal.col - curr.col)  - cost(null,curr) + 5;
         }
-        else{
-            count_steps = Math.abs(goal.col - curr.col);
-        }
-//        count_steps = Math.abs(goal.row - curr.row) + Math.abs(goal.col - curr.col);
-//        curr.g_plus_h = g(curr);
-//        count_steps = (int) Math.sqrt(Math.pow(curr.col - goal.col, 2)+Math.pow(curr.row - goal.row, 2));
-        curr.g_plus_h = curr.cost_to_here + count_steps;
-        return count_steps;
+        curr.g_plus_h = curr.cost_to_here + heuristic_eval;
+        return heuristic_eval;
     }
 
     public int f(Node curr ,Node goal){
         /*
-        A function that use for the informed algorithms
+        A function that use for evaluate the nodes in informed algorithms
          */
         return g(curr) + h(curr, goal);
     }

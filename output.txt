@@ -1,4 +1,4 @@
-R-R-R-R
-Num: 65569527
-Cost: 12
-10.6990 seconds
+D-RD-R-RD-RD-RD-RD-RD
+Num: 32083
+Cost: 61
+0.0570 seconds

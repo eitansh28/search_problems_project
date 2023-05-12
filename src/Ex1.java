@@ -50,11 +50,14 @@ public class Ex1 {
         //parse the input
         String algo = (String)inputs_args.get(0);
         String create_nodes_order = (String)inputs_args.get(1);
-        boolean clockwise = Objects.equals(create_nodes_order, "clockwise");
+        boolean clockwise;
         String Node_preference = null;
         if(Objects.equals(algo, "DFBnB") || Objects.equals(algo, "A*")){
             String[] temp = create_nodes_order.split(" ", 2);
             Node_preference = temp[1];
+            clockwise = Objects.equals(temp[0], "clockwise");
+        }else{
+            clockwise = Objects.equals(create_nodes_order, "clockwise");
         }
         boolean new_first = Objects.equals(Node_preference, "new-first");
         String str_time = (String)inputs_args.get(2);
@@ -70,29 +73,20 @@ public class Ex1 {
         Map map = new Map(draw_map);
 
         //Running the algorithm based on the input
-//        if(Objects.equals(algo, "BFS")){
-//            BFS.bfs(start,goal, map, clockwise,print_time ,print_open_list);
-//        }
-//        else if(Objects.equals(algo, "DFID")){
-//            DFID.dfid(start,goal, map, clockwise, print_time);
-//        }
-//        else if(Objects.equals(algo, "A*")){
-//            A_STAR.A_star(start, goal, map, clockwise, print_time ,print_open_list, new_first);
-//        }
-//        else if(Objects.equals(algo, "IDA*")){
-//            IDA_STAR.IDA_star(start, goal, map, clockwise, print_time ,print_open_list);
-//        }
-//        else if(Objects.equals(algo, "DFBnB*")){
-//            DFBnB.dfbnb(start, goal, map, clockwise, print_time ,print_open_list, new_first);
-//        }
-
-
-        Node n = new Node(3, 2);
-        Node v = new Node(2, 6);
-//        BFS.bfs(start,goal, map, clockwise,print_time ,print_open_list);
-//            DFID.dfid(start,goal, map, clockwise, print_time, print_open_list);
-//        A_STAR.A_star(start, v, map, clockwise, print_time ,print_open_list, false);
-//        IDA_STAR.IDA_star(start, v, map, clockwise, print_time ,print_open_list);
-        DFBnB.dfbnb(start, v, map, clockwise, print_time ,print_open_list, true);
-}
+        if(Objects.equals(algo, "BFS")){
+            BFS.bfs(start,goal, map, clockwise,print_time ,print_open_list);
+        }
+        else if(Objects.equals(algo, "DFID")){
+            DFID.dfid(start,goal, map, clockwise, print_time, print_open_list);
+        }
+        else if(Objects.equals(algo, "A*")){
+            A_STAR.A_star(start, goal, map, clockwise, print_time ,print_open_list, new_first);
+        }
+        else if(Objects.equals(algo, "IDA*")){
+            IDA_STAR.IDA_star(start, goal, map, clockwise, print_time ,print_open_list);
+        }
+        else if(Objects.equals(algo, "DFBnB*")){
+            DFBnB.dfbnb(start, goal, map, clockwise, print_time ,print_open_list, new_first);
+        }
+    }
 }
