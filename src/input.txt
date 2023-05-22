@@ -1,4 +1,4 @@
-BFS
+IDA*
 clockwise
 with time
 no open

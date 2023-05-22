@@ -9,7 +9,7 @@ public class A_STAR {
     public static boolean first_new;   //A variable that tells us whether to act according to new-first or old-first
     public static int max_possible_neigh = 8;
 
-    public static Comparator<Node> f_Comparator = new Comparator<>() {  //Creating a comparator for sorting the nodes in the priority queue (according to the f value of each node, increasing order)
+    public static Comparator<Node> f_Comparator = new Comparator<Node>() {  //Creating a comparator for sorting the nodes in the priority queue (according to the f value of each node, increasing order)
         @Override
         public int compare(Node n1, Node n2) {
             if (first_new) {   //If there is equality in the f value, the choice depends on new-first/old-first

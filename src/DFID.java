@@ -36,6 +36,7 @@ public class DFID {
                 return result;
             }
             depth++;   //if we pass the previous threshold and there is no solution, increase the threshold by 1
+//            System.out.println(depth);
             path.clear();
         }
     }

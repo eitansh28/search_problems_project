@@ -43,7 +43,7 @@ public class Ex1 {
     public static void main(String[] args) throws IOException {
         List<Object> inputs_args = new ArrayList<Object>();
 
-        Scanner scanner = new Scanner(new File("input.txt"));
+        Scanner scanner = new Scanner(new File("src/input.txt"));
         while (scanner.hasNextLine()) {
             inputs_args.add(scanner.nextLine());
         }
@@ -85,7 +85,7 @@ public class Ex1 {
         else if(Objects.equals(algo, "IDA*")){
             IDA_STAR.IDA_star(start, goal, map, clockwise, print_time ,print_open_list);
         }
-        else if(Objects.equals(algo, "DFBnB*")){
+        else if(Objects.equals(algo, "DFBnB")){
             DFBnB.dfbnb(start, goal, map, clockwise, print_time ,print_open_list, new_first);
         }
     }

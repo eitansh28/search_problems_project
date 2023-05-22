@@ -1,4 +1,0 @@
-D-RD-R-RD-RD-RD-RD-RD
-Num: 32083
-Cost: 61
-0.0570 seconds
